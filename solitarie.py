@@ -125,9 +125,15 @@ def position_moves(pos,board):
 #returns a list with all the available moves in a board                                                                                  
 def board_moves(board):
     moves=[]
+
     for i in range(board_lines(board)):
         for j in range(board_cols(board)):
-            moves=moves+position_moves(make_pos(i,j),board)
+            pos = make_pos(i,j)
+            content = pos_content(board, pos)
+            
+            # If that position is empty, find possible moves
+            if is_empty(content):
+                moves=moves+position_moves(pos,board)
     return moves
 
 #returns a copy of a board
